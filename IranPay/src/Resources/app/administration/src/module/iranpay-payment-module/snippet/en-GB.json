@@ -1,0 +1,27 @@
+{
+    "module": {
+        "name": "IRAN PAY. transactions list",
+        "title": "IRAN PAY. transactions list",
+        "description": "IRAN PAY. transactions list",
+        "navigation": {
+            "label": "Iran-PAY. transactions"
+        }
+    },
+    "order": {
+        "transaction": {
+            "paid": "Paid (Capture)",
+            "cancelled": "Cancelled (Void)"
+        }
+    },
+    "transactions-list": {
+        "iranpay_transaction_id": "Transaction ID",
+        "payment_id": "Payment ID",
+        "amount": "Amount",
+        "created_at": "Created at",
+        "updated_at": "Updated at",
+        "order_number": "Order number",
+        "customer": "Customer",
+        "status": "Transaction status",
+        "links": "Links"
+    }
+}
