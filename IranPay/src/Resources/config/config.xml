@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Payment Credentials </title>
+        <input-field>
+            <name>payping</name>
+            <label>PayPing Token</label>
+            <helpText> you can find your token-code at: https://payping.ir</helpText>
+        </input-field>
+
+        <input-field>
+            <name>payir</name>
+            <label>PayIR API Code</label>
+            <helpText> you can find your API-code at: https://pay.ir</helpText>
+        </input-field>
+
+        <input-field>
+            <name>farapal</name>
+            <label>Fara Pal  Merchant Code</label>
+            <helpText> you can find your Merchant-code at: https://farapal.ir</helpText>
+        </input-field>
+
+        <input-field>
+            <name>nextpay</name>
+            <label>Next Pay API Code</label>
+            <helpText> you can find your Merchant-code at: https://nextpay.com</helpText>
+        </input-field>
+
+    </card>
+</config>

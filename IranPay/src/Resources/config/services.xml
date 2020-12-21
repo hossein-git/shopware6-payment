@@ -1,0 +1,89 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <defaults autowire="true" autoconfigure="true"/>
+
+        <service id="IranPay\Setting\Service\SettingService">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+        </service>
+
+        <!--Definition Extensions-->
+        <service id="IranPay\Core\Checkout\Order\OrderExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <!--Entities-->
+        <service id="IranPay\Entity\IranPayTransactionEntityDefinition">
+            <tag name="shopware.entity.definition" entity="iranpay_transactions" />
+        </service>
+
+        <service id="IranPay\DAL\InsertToDB">
+            <argument type="service" id="iranpay_transactions.repository"/>
+            <argument type="service" id="Symfony\Component\DependencyInjection\ContainerInterface"/>
+        </service>
+
+        <service id="IranPay\Helpers\GenerateToken">
+            <argument type="service" id="Shopware\Storefront\Framework\Routing\Router"/>
+        </service>
+
+        <service id="IranPay\Service\PayPingPayment">
+            <argument type="service" id="Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionStateHandler"/>
+            <argument type="service" id="IranPay\DAL\InsertToDB"/>
+            <argument type="service" id="IranPay\Setting\Service\SettingService"/>
+            <argument type="service" id="IranPay\Helpers\GenerateToken"/>
+            <tag name="shopware.payment.method.async" />
+        </service>
+
+        <service id="IranPay\Service\PayIrPayment">
+            <argument type="service" id="Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionStateHandler"/>
+            <argument type="service" id="IranPay\DAL\InsertToDB"/>
+            <argument type="service" id="IranPay\Setting\Service\SettingService"/>
+            <argument type="service" id="IranPay\Helpers\GenerateToken"/>
+            <tag name="shopware.payment.method.async" />
+        </service>
+
+        <service id="IranPay\Service\FaraPalPayment">
+            <argument type="service" id="Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionStateHandler"/>
+            <argument type="service" id="IranPay\DAL\InsertToDB"/>
+            <argument type="service" id="IranPay\Setting\Service\SettingService"/>
+            <argument type="service" id="IranPay\Helpers\GenerateToken"/>
+            <tag name="shopware.payment.method.async" />
+        </service>
+
+        <service id="IranPay\Service\NextPayPayment">
+            <argument type="service" id="Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionStateHandler"/>
+            <argument type="service" id="IranPay\DAL\InsertToDB"/>
+            <argument type="service" id="IranPay\Setting\Service\SettingService"/>
+<!--            <argument type="service" id="IranPay\Helpers\GenerateToken"/>-->
+            <tag name="shopware.payment.method.async" />
+        </service>
+
+        <service id="IranPay\Core\Payment\PaymentService">
+            <argument type="service" id="Shopware\Core\Checkout\Payment\Cart\PaymentTransactionChainProcessor"/>
+            <argument type="service" id="Shopware\Core\Checkout\Payment\Cart\Token\JWTFactoryV2"/>
+            <argument type="service" id="payment_method.repository"/>
+            <argument type="service" id="Shopware\Core\Checkout\Payment\Cart\PaymentHandler\PaymentHandlerRegistry"/>
+            <argument type="service" id="order_transaction.repository"/>
+            <argument type="service" id="Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionStateHandler"/>
+            <argument type="service" id="Symfony\Component\Routing\RouterInterface"/>
+        </service>
+
+        <service id="IranPay\Controller\PaymentController">
+            <argument type="service" id="IranPay\Core\Payment\PaymentService"/>
+<!--            <argument type="service" id="Symfony\Component\Routing\RouterInterface"/>-->
+            <tag name="controller.service_arguments" />
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+
+
+
+
+    </services>
+</container>

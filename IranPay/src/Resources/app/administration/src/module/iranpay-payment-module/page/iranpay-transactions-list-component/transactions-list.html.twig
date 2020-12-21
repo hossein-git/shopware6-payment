@@ -1,0 +1,79 @@
+{% block transaction_list %}
+    <sw-page class="iranpay-transaction-list">
+        <template slot="content">
+            {% block transaction_list_content %}
+                <iranpay-transactions-list
+                    v-if="transactions"
+                    :items="transactions"
+                    :repository="repository"
+                    :showActions="false"
+                    :showSettings="false"
+                    :showSelection="false"
+                    :allowColumnEdit="false"
+                    :sortIsAllowed="true"
+                    :columns="columns">
+
+                    <template slot="column-customer.lastName" slot-scope="{item}">
+                        <router-link class="sw-data-grid__cell-value"
+                                     :to="{ name: 'sw.customer.detail.base', params: { id: item.customerId } }">
+                            {{ item.customer.lastName }} {{ item.customer.firstName }}
+                        </router-link>
+                    </template>
+
+                    <template slot="column-order.orderNumber" slot-scope="{item}">
+                        <router-link class="sw-data-grid__cell-value"
+                                     :to="{ name: 'sw.order.detail.base', params: { id: item.orderId }}">
+                            {{ item.order.orderNumber }}
+                        </router-link>
+                    </template>
+
+                    <template slot="column-status" slot-scope="{ item }">
+                        <sw-label :variant="getVariantFromPaymentState(item.stateMachineState.technicalName)" appearance="pill">
+                            {{ item.stateMachineState.name }}
+                        </sw-label>
+                    </template>
+
+                    <template slot="column-n.status" slot-scope="{ item }">
+                        {{ item.status }}
+                    </template>
+
+                    <template slot="column-paymentMethod" slot-scope="{ item }">
+                        {{ item.paymentMethod }}
+                    </template>
+
+                    <template slot="column-exception" slot-scope="{ item }">
+                        {{ item.exception }}
+{#                        <span style="color: red" v-if="item.exception" @click="openModal">Exception</span>#}
+{#                        <sw-modal#}
+{#                            v-if="showExModal"#}
+{#                            slector="p"#}
+{#                            @modal-close="showExModal = false"#}
+{#                            title="Exception">#}
+{#                                <p v-html="item.exception">#}
+{#                                    {{ item.exception }}#}
+{#                                </p>#}
+{#                        </sw-modal>#}
+
+                    </template>
+
+                    <template slot-scope="{ item }">
+
+                    </template>
+
+
+                    <template slot="column-updatedAt" slot-scope="{ item }">
+                        {{ getData(item.updatedAt) }}
+                    </template>
+
+                    <template slot="column-createdAt" slot-scope="{ item }">
+                        {{ getData(item.createdAt) }}
+                    </template>
+
+                </iranpay-transactions-list>
+
+
+            {% endblock %}
+        </template>
+
+    </sw-page>
+{% endblock %}

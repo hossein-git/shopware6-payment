@@ -1,0 +1,34 @@
+{
+    "name": "dayako/iran-payments",
+    "description": "Iranian Payments",
+    "type": "shopware-platform-plugin",
+    "authors": [
+        {
+            "name": "Hossein Haghparast ",
+            "email" : "haghparast@ngsi.de",
+            "homepage": "https://findhossein.com"
+        }
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "IranPay\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "IranPay\\IranPay",
+        "copyright": "(c) by Hossein Haghparast",
+        "plugin-icon": "src/Resources/public/icon.jpg",
+        "label": {
+            "de-DE": "Iran Payment",
+            "en-GB": "Iran Payment"
+        },
+        "description": {
+            "en-GB": "4 payment method plugin , please add your api key in the config"
+        },
+        "manufacturerLink": {
+            "de-DE": "https://www.findhossein.com",
+            "en-GB": "https://www.findhossein.com"
+        }
+    }
+}
